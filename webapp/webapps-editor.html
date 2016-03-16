@@ -16,12 +16,22 @@
 <div id="editor-toolbar">
 
 	<div class="btn-group">
-		<button type="button" class="btn btn-default" title="Ouvrir un fichier" disabled="disabled">
-			<i class="fa fa-file"></i>
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<i class="fa fa-bars"></i>
+			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<button type="button" class="btn btn-default" title="Sauvegarder le texte" disabled="disabled">
-			<i class="fa fa-save"></i>
-		</button>
+		<ul class="dropdown-menu">
+			<li class="disabled"><a href="#"><i class="fa fa-file"></i> Ouvrir un fichier</a></li>
+			<li class="disabled"><a href="#"><i class="fa fa-save"></i> Sauvegarder le texte</a></li>
+			<li role="separator" class="divider"></li>
+			<li class="command" data-command="undo"><a href="#"><i class="fa fa-undo"></i> Annuler</a></li>
+			<li class="command" data-command="redo"><a href="#"><i class="fa fa-repeat"></i> Refaire</a></li>
+			<li role="separator" class="divider"></li>
+			<li class="command" data-command="cut"><a href="#"><i class="fa fa-cut"></i> Couper</a></li>
+			<li class="command" data-command="copy"><a href="#"><i class="fa fa-copy"></i> Copier</a></li>
+			<li class="command" data-command="paste"><a href="#"><i class="fa fa-paste"></i> Coller</a></li>
+			<li class="command" data-command="delete"><a href="#"><i class="fa fa-remove"></i> Supprimer la sélection</a></li>
+		</ul>
 	</div>
 
 	<div class="btn-group" id="font-family-menu">
@@ -82,7 +92,7 @@
 			<li><a href="#">...</a></li>
 		</ul>
 	</div>
-
+	
 	<div class="btn-group" title="Couleur du fond" id="background-color-menu">
 		<button type="button" class="btn btn-default" data-command="backColor"><b style="border: 1px solid black; background-color: #FFFF00; padding: 0 2px; ">A</b></button>
 		<button type="button" class="btn btn-default dropdown-toggle" data-command="backColor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -115,10 +125,13 @@
 		<button type="button" class="btn btn-default command" data-command="strikeThrough" title="Barré">
 			<i class="fa fa-strikethrough"></i>
 		</button>
-		<button type="button" class="btn btn-default command" data-command="subscript" title="Exposant">
+	</div>
+
+	<div class="btn-group">
+		<button type="button" class="btn btn-default command" data-command="subscript" title="Indice">
 			<i class="fa fa-subscript"></i>
 		</button>
-		<button type="button" class="btn btn-default command" data-command="superscript" title="Indice">
+		<button type="button" class="btn btn-default command" data-command="superscript" title="Exposant">
 			<i class="fa fa-superscript"></i>
 		</button>
 		<button type="button" class="btn btn-default command" data-command="decreaseFontSize" title="Diminuer la taille du texte">
@@ -161,54 +174,36 @@
 		<button type="button" class="btn btn-default command" data-command="outdent" title="Diminuer le retrait">
 			<i class="fa fa-outdent"></i>
 		</button>
-		<button type="button" class="btn btn-default block-command" data-command="formatBlock" title="Citation" data-tag="blockquote">
+		<button type="button" class="btn btn-default block-command" data-command="formatBlock" title="Citation" data-tag="BLOCKQUOTE">
 			<i class="fa fa-quote-left"></i>
 		</button>
 	</div>
 
 	<div class="btn-group">
-		<button type="button" class="btn btn-default command" data-command="cut" title="Couper">
-			<i class="fa fa-cut"></i>
-		</button>
-		<button type="button" class="btn btn-default command" data-command="copy" title="Copier">
-			<i class="fa fa-copy"></i>
-		</button>
-		<button type="button" class="btn btn-default command" data-command="paste" title="Coller">
-			<i class="fa fa-paste"></i>
-		</button>
-		<button type="button" class="btn btn-default command" data-command="delete" title="Supprimer la sélection">
-			<i class="fa fa-remove"></i>
-		</button>
-		<button type="button" class="btn btn-default command" data-command="undo" title="Annuler">
-			<i class="fa fa-undo"></i>
-		</button>
-		<button type="button" class="btn btn-default command" data-command="redo" title="Refaire">
-			<i class="fa fa-repeat"></i>
-		</button>
-	</div>
-
-	<div class="btn-group">
-		<button type="button" class="btn btn-default command" data-command="insertHorizontalRule" title="Insérer une ligne horizontale">
-			_
-		</button>
-		<button id="insert-image" type="button" class="btn btn-default prompt-command" data-command="insertImage" title="Insérer une image"
-			data-prompt="URL de l'image" data-default="http://dummyimage.com/160x90" data-format="">
-			<i class="fa fa-image"></i>
-		</button>
-		<button id="insert-video" type="button" class="btn btn-default prompt-command" data-command="insertHTML" title="Insérer une vidéo"
-			data-prompt="URL de la vidéo" data-default="http://www.w3schools.com/tags/movie.mp4" data-format="<video width=&quot;320&quot; height=&quot;240&quot; controls src=&quot;%VALUE%&quot;></video>">
-			<i class="fa fa-video-camera"></i>
-		</button>
-		<button id="insert-audio" type="button" class="btn btn-default prompt-command" data-command="insertHTML" title="Insérer un média audio"
-			data-prompt="URL de la piste audio" data-default="http://www.w3schools.com/tags/horse.ogg" data-format="<audio controls src=&quot;%VALUE%&quot;></audio>">
-			<i class="fa fa-music"></i>
-		</button>
-		<button id="insert-link" type="button" class="btn btn-default prompt-command" data-command="createLink" title="Insérer un lien"
+		<button type="button" class="btn btn-default prompt-command" data-command="createLink" title="Insérer un lien"
 			data-prompt="URL du lien" data-default="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand" data-format="">
 			<i class="fa fa-link"></i>
 		</button>
 		<button type="button" class="btn btn-default command" data-command="unlink" title="Supprimer le lien">
 			<i class="fa fa-unlink"></i>
+		</button>
+	</div>
+
+	<div class="btn-group">
+		<button type="button" class="btn btn-default prompt-command" data-command="insertImage" title="Insérer une image"
+			data-prompt="URL de l'image" data-default="http://dummyimage.com/160x90" data-format="">
+			<i class="fa fa-image"></i>
+		</button>
+		<button type="button" class="btn btn-default prompt-command" data-command="insertHTML" title="Insérer une vidéo"
+			data-prompt="URL de la vidéo" data-default="http://www.w3schools.com/tags/movie.mp4" data-format="<video width=&quot;320&quot; height=&quot;240&quot; controls src=&quot;%VALUE%&quot;></video>">
+			<i class="fa fa-video-camera"></i>
+		</button>
+		<button type="button" class="btn btn-default prompt-command" data-command="insertHTML" title="Insérer un média audio"
+			data-prompt="URL de la piste audio" data-default="http://www.w3schools.com/tags/horse.ogg" data-format="<audio controls src=&quot;%VALUE%&quot;></audio>">
+			<i class="fa fa-music"></i>
+		</button>
+		<button type="button" class="btn btn-default command" data-command="insertHorizontalRule" title="Insérer une ligne horizontale">
+			_
 		</button>
 	</div>
 </div>
@@ -219,7 +214,6 @@
 		<li>ouvrir un fichier</li>
 		<li>sauvegarder le texte</li>
 		<li>taille de fonte en "pt" (8, 9, 10, 11, _12_, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72) plutôt que HTML (1..7)</li>
-		<li>bouton "Plus d'options..." ou responsive</li>
 		<li>raccourcis clavier</li>
 		<li>capture(s) d'écran</li>
 	</ul>

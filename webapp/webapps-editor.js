@@ -3,6 +3,11 @@
 $(function() {
 	document.execCommand('styleWithCSS', null, true); // true par défaut
 
+	// Ajuster le début de page en fonction de la hauteur de la barre d'outil
+	$(window).on('resize', function() {
+		$(document.body).css('padding-top', $('#editor-toolbar').outerHeight() + 'px');		
+	}).triggerHandler('resize');
+	
 	// Désactiver les boutons non supportés
 	$('#editor-toolbar button[data-command]').each(function(index, element) {
 		var self = $(element);
@@ -11,15 +16,29 @@ $(function() {
 		}
 	});
 
+	// Désactiver les entrées de menu non supportées
+	$('#editor-toolbar li[data-command]').each(function(index, element) {
+		var self = $(element);
+		if (!document.queryCommandSupported(self.attr('data-command'))) {
+			self.addClass('disabled').attr('title', 'Non supporté par votre navigateur');
+		}
+	});
+
 	// Gérer automatiquement le clic sur les boutons simples
 	$('#editor-toolbar').on('click', 'button.command', function(event) {
 		document.execCommand($(event.target).attr('data-command'));
 	});
 
+	// Gérer automatiquement le clic sur les entrées de menu simples
+	$('#editor-toolbar').on('click', 'li.command > a', function(event) {
+		event.preventDefault();
+		document.execCommand($(event.target).closest('.command').attr('data-command'));
+	});
+
 	// Gérer automatiquement le clic sur les boutons "block-command"
 	$('#editor-toolbar').on('click', 'button.block-command', function(event) {
 		var self = $(event.target);
-		document.execCommand(self.attr('data-command'), null, self.attr('data-tag') || 'p');
+		document.execCommand(self.attr('data-command'), null, self.attr('data-tag') || 'P');
 	});
 
 	// Gérer automatiquement le clic sur les boutons "prompt-command"
@@ -148,7 +167,7 @@ $(function() {
 	 * - Ctrl + I : Italic (Italic)
 	 * - Ctrl + U : Souligné (Underline)
 	 * - Ctrl + Maj + B : Indice (Base)
-	 * - Ctrl + Maj + P : Exposant (Power) 
+	 * - Ctrl + Maj + P : Exposant (Power)
 	 * - Ctrl + M : Retirer le formatage
 	 * - Ctrl + L : Aligné à gauche (Left)
 	 * - Ctrl + E : Centré (??)
@@ -159,10 +178,9 @@ $(function() {
 	 * - Ctrl + C : Copier (Copy)
 	 * - Ctrl + V : Coller (Paste)
 	 * - Ctrl + F12 : Insérer un tableau
-	 * - Ctrl + XXX : 
-	 * - Ctrl + XXX : 
 	 * - F12 : Liste numérotée
 	 * - Maj + F12 : Liste à puces
+	 * 
 	 * Autres commandes dispo
 	 * - enableInlineTableEditing <bool>
 	 * - enableObjectResizing <bool>
