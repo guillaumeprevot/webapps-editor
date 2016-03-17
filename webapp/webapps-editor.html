@@ -13,6 +13,8 @@
 	</head>
 	<body>
 
+<input id="open-file-input" type="file" accept="text/*" style="display: none;" />
+
 <div id="editor-toolbar">
 
 	<div class="btn-group">
@@ -21,16 +23,16 @@
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
 		<ul class="dropdown-menu">
-			<li class="disabled"><a href="#"><i class="fa fa-file"></i> Ouvrir un fichier</a></li>
-			<li class="disabled"><a href="#"><i class="fa fa-save"></i> Sauvegarder le texte</a></li>
+			<li><a href="#" id="open-file-button"><i class="fa fa-file"></i> Ouvrir un fichier</a></li>
+			<li><a href="#" id="save-file-button" download="fichier.html"><i class="fa fa-save"></i> Sauvegarder le texte</a></li>
 			<li role="separator" class="divider"></li>
-			<li class="command" data-command="undo"><a href="#"><i class="fa fa-undo"></i> Annuler</a></li>
-			<li class="command" data-command="redo"><a href="#"><i class="fa fa-repeat"></i> Refaire</a></li>
+			<li><a href="#" class="command" data-command="undo"><i class="fa fa-undo"></i> Annuler</a></li>
+			<li><a href="#" class="command" data-command="redo"><i class="fa fa-repeat"></i> Refaire</a></li>
 			<li role="separator" class="divider"></li>
-			<li class="command" data-command="cut"><a href="#"><i class="fa fa-cut"></i> Couper</a></li>
-			<li class="command" data-command="copy"><a href="#"><i class="fa fa-copy"></i> Copier</a></li>
-			<li class="command" data-command="paste"><a href="#"><i class="fa fa-paste"></i> Coller</a></li>
-			<li class="command" data-command="delete"><a href="#"><i class="fa fa-remove"></i> Supprimer la sélection</a></li>
+			<li><a href="#" class="command" data-command="cut"><i class="fa fa-cut"></i> Couper</a></li>
+			<li><a href="#" class="command" data-command="copy"><i class="fa fa-copy"></i> Copier</a></li>
+			<li><a href="#" class="command" data-command="paste"><i class="fa fa-paste"></i> Coller</a></li>
+			<li><a href="#" class="command" data-command="delete"><i class="fa fa-remove"></i> Supprimer la sélection</a></li>
 		</ul>
 	</div>
 
@@ -211,11 +213,11 @@
 <div id="editor-content" contenteditable="true">
 	<p>TODO</p>
 	<ul>
-		<li>ouvrir un fichier</li>
-		<li>sauvegarder le texte</li>
 		<li>taille de fonte en "pt" (8, 9, 10, 11, _12_, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72) plutôt que HTML (1..7)</li>
 		<li>raccourcis clavier</li>
-		<li>capture(s) d'écran</li>
+		<li>caractères spéciaux / smileys</li>
+		<li>tableaux</li>
+		<li>maximiser / imprimer / voir source</li>
 	</ul>
 	<p>Quae dum ita struuntur, indicatum est apud Tyrum indumentum regale textum occulte, incertum quo locante vel cuius usibus apparatum. ideoque rector provinciae tunc pater Apollinaris eiusdem nominis ut conscius ductus est aliique congregati sunt ex diversis civitatibus multi, qui atrocium criminum ponderibus urgebantur.</p>
 	<p>Denique Antiochensis ordinis vertices sub uno elogio iussit occidi ideo efferatus, quod ei celebrari vilitatem intempestivam urgenti, cum inpenderet inopia, gravius rationabili responderunt; et perissent ad unum ni comes orientis tunc Honoratus fixa constantia restitisset.</p>

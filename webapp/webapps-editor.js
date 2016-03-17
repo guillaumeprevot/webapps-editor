@@ -1,5 +1,10 @@
 // document.designMode = "on";
 
+function encodeBase64(text) {
+	// https://developer.mozilla.org/fr/docs/D%C3%A9coder_encoder_en_base64#The_.22Unicode_Problem.22
+	return window.btoa(unescape(encodeURIComponent(text)));
+}
+
 $(function() {
 	document.execCommand('styleWithCSS', null, true); // true par défaut
 
@@ -7,7 +12,31 @@ $(function() {
 	$(window).on('resize', function() {
 		$(document.body).css('padding-top', $('#editor-toolbar').outerHeight() + 'px');		
 	}).triggerHandler('resize');
-	
+
+	// Permettre à l'utilisateur de pouvoir ouvrir un fichier
+	$('#open-file-button').on('click', function(event) {
+		event.preventDefault();
+		$('#open-file-input').click();
+	});
+	$('#open-file-input').on('change', function(event) {
+		if (this.files && this.files.length > 0) {
+			var file = this.files[0];
+			var reader = new FileReader();
+			reader.onload = function(event) {
+				$('#save-file-button').attr('download', file.name);
+				$('#editor-content').html(event.target.result);
+			};
+			reader.readAsText(file);
+		}
+	});
+
+	// Sauvegarder le contenu
+	$('#save-file-button').on('click', function(event) {
+		var text = $('#editor-content').html();
+		//event.preventDefault();
+		$(this).attr('href', 'data:text/plain;base64,' + encodeBase64(text));
+	});
+
 	// Désactiver les boutons non supportés
 	$('#editor-toolbar button[data-command]').each(function(index, element) {
 		var self = $(element);
@@ -17,10 +46,10 @@ $(function() {
 	});
 
 	// Désactiver les entrées de menu non supportées
-	$('#editor-toolbar li[data-command]').each(function(index, element) {
+	$('#editor-toolbar li a[data-command]').each(function(index, element) {
 		var self = $(element);
 		if (!document.queryCommandSupported(self.attr('data-command'))) {
-			self.addClass('disabled').attr('title', 'Non supporté par votre navigateur');
+			self.parent().addClass('disabled').attr('title', 'Non supporté par votre navigateur');
 		}
 	});
 
@@ -30,9 +59,9 @@ $(function() {
 	});
 
 	// Gérer automatiquement le clic sur les entrées de menu simples
-	$('#editor-toolbar').on('click', 'li.command > a', function(event) {
+	$('#editor-toolbar').on('click', 'li > a.command', function(event) {
 		event.preventDefault();
-		document.execCommand($(event.target).closest('.command').attr('data-command'));
+		document.execCommand($(event.target).attr('data-command'));
 	});
 
 	// Gérer automatiquement le clic sur les boutons "block-command"
@@ -130,8 +159,8 @@ $(function() {
 	// Modification de la couleur de fond
 	var backgroundColorMenu = $('#background-color-menu');
 	backgroundColorMenu.on('click', 'button:first-child', function(event) {
-		// Clic sur le bouton indiquant la dernière couleur utilisée
-		var self = $(event.target).children(),
+		// Clic sur le "button" ou son files "b" indiquant la dernière couleur utilisée
+		var self = $(event.target).children().andSelf().filter('b'),
 			color = self.css('background-color');
 		document.execCommand('backColor', null, color);
 	}).on('click', 'ul > li:not(:last-child) > a', function(event) {
