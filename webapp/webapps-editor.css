@@ -6,6 +6,8 @@ body { padding-top: 54px; }
 #editor-toolbar { position: fixed; left: 0; top: 0; right: 0; padding: 10px 10px 5px; background-color: #333; color: white; height: auto; }
 #editor-toolbar > * { margin-bottom: 5px; }
 #editor-toolbar .info { font-size: small; color: #999; }
+#editor-toolbar .btn-default, #editor-toolbar .btn:hover[disabled] { color: #bbb; background-color: #444; border-color: #222; }
+#editor-toolbar .btn-default:focus, #editor-toolbar .btn-default:hover { color: #ddd; background-color: #666; }
 
 #editor-content  { font-family: Courier, monospace; padding: 10px 15px; }
 
