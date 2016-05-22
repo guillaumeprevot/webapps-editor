@@ -9,7 +9,7 @@ A simple HTML editor using [document.execCommand](https://developer.mozilla.org/
 
 Les librairies suivantes ont été utilisées pour cette application :
 
-- [jQuery 2.2.1](http://jquery.com/) sous licence MIT
+- [jQuery 2.2.4](http://jquery.com/) sous licence MIT
 - [Bootstrap 3.3.6](http://getbootstrap.com/css/) sous licence MIT
 - [Bootstrap Colorpicker 2.3.0](https://github.com/mjolnic/bootstrap-colorpicker/) sous licence Apache 2.0
 - [Font Awesome 4.5.0](http://fortawesome.github.io/Font-Awesome/) SIL OFL 1.1 (police) et MIT (code)
@@ -24,3 +24,31 @@ NB : quand le certificat HTTPS est incorrect, la mise en cache échouera sous Ch
 
 ![Présentation de l'IHM](./screenshots/webapps-editor-1.png)
 
+### Changelog
+
+2016-03-15
+- Première version
+
+2016-03-16
+- passage en menu de toutes les actions non liées à la mise en forme (ouvrir, enregistrer, annuler, refaire, couper, copier, coller, supprimer)
+- restauration de la taille des "dropdown-toggle" car plus facile pour viser en tactile
+- réorganisation des actions restantes pour faciliter le dimensionnement
+- ajouter d'un listener $(window).on('resize', ...) pour ajuster le début de la zone d'édition
+
+2016-03-17
+- ajout de la fonction "Ouvrir un fichier"
+- ajout de la fonction "Sauvegarder le texte"
+- ajout d'une capture(s) d'écran utilisée dans README
+- correction d'un bug sur le surlignage sous Chrome
+
+2016-03-18
+- ajout du favicon
+
+2016-03-25
+- changement de favicon
+- mise à jour de jQuery en 2.2.2
+
+2016-05-22
+- correction de la mise en cache de FontAwesome
+- mise à jour de jquery 2.2.4
+- ajout de la section ChangeLog
