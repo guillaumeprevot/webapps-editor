@@ -24,10 +24,14 @@ NB : quand le certificat HTTPS est incorrect, la mise en cache échouera sous Ch
 
 ![Présentation de l'IHM](./screenshots/webapps-editor-1.png)
 
-### Changelog
+## Licence
+
+Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ici présent.
+
+## Changelog
 
 2016-03-15
-- Première version
+- première version
 
 2016-03-16
 - passage en menu de toutes les actions non liées à la mise en forme (ouvrir, enregistrer, annuler, refaire, couper, copier, coller, supprimer)
@@ -52,3 +56,6 @@ NB : quand le certificat HTTPS est incorrect, la mise en cache échouera sous Ch
 - correction de la mise en cache de FontAwesome
 - mise à jour de jquery 2.2.4
 - ajout de la section ChangeLog
+
+2016-06-28
+- ajout du fichier LICENCE
