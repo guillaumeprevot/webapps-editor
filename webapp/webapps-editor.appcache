@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Version 2016-07-16
+# Version 2017-05-21
 
 CACHE:
 ./libs/bootstrap/css/bootstrap.min.css
@@ -13,9 +13,9 @@ CACHE:
 ./libs/bootstrap-colorpicker/img/bootstrap-colorpicker/saturation.png
 ./libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js
 ./libs/font-awesome/css/font-awesome.min.css
-./libs/font-awesome/fonts/fontawesome-webfont.ttf?v=4.6.3
-./libs/font-awesome/fonts/fontawesome-webfont.woff?v=4.6.3
-./libs/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3
+./libs/font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0
+./libs/font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0
+./libs/font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0
 ./libs/jquery/jquery.min.js
 ./webapps-editor.css
 ./webapps-editor.js
