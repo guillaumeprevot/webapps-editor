@@ -183,6 +183,14 @@ $(function() {
 		$('<a href="#" class="dropdown-item" style="background-color: ' + color + ';">&nbsp;</a>').prependTo(backgroundColorMenu.children('.dropdown-menu'));
 	});
 
+	// Insertion d'un tableau
+	$('#insert-table-button').on('click', function() {
+		// activé par défaut
+		// document.execCommand('enableObjectResizing', null, true); // les carrés pour changer les dimensions
+		// document.execCommand('enableInlineTableEditing', null, true); // les flèches pour ajouter et la croix pour supprimer
+		document.execCommand('insertHTML', null, '<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>');
+	});
+
 	/**
 	 * Raccourcis
 	 * - Ctrl + O : Ouvrir (Open)
