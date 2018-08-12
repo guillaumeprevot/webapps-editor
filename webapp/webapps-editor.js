@@ -191,6 +191,16 @@ $(function() {
 		document.execCommand('insertHTML', null, '<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>');
 	});
 
+	// Une fois la page chargée, on met en place le service worker qui gère le cache
+	if ('serviceWorker' in navigator && navigator.onLine) {
+		var href = window.location.href.replace('webapps-editor.html', 'webapps-editor-sw.js');
+		navigator.serviceWorker.register(href).then(function(registration) {
+			console.log('ServiceWorker registration success');
+		}, function(err) {
+			console.log('ServiceWorker registration failed: ', err);
+		});
+	}
+
 	/**
 	 * Raccourcis
 	 * - Ctrl + O : Ouvrir (Open)
