@@ -1,14 +1,15 @@
 @CHARSET "UTF-8";
 
 html { width: 100%; height: 100%; }
-body { padding-top: 54px; }
+body { width: 100%; height: 100%; display: flex; flex-direction: column; }
 
-#editor-toolbar { position: fixed; left: 0; top: 0; right: 0; padding: 10px 10px 5px; background-color: #333; color: white; height: auto; }
+#editor-toolbar { flex: none; padding: 10px 10px 5px; background-color: #333; color: white; }
 #editor-toolbar > * { margin-bottom: 5px; }
 #editor-toolbar .info { font-size: small; color: #999; }
 #editor-toolbar .btn-default, #editor-toolbar .btn:hover[disabled] { color: #bbb; background-color: #444; border-color: #222; }
 #editor-toolbar .btn-default:focus, #editor-toolbar .btn-default:hover { color: #ddd; background-color: #666; }
 
-#editor-content  { font-family: Courier, monospace; padding: 10px 15px; }
+#editor-content { flex: auto; overflow-y: scroll; font-family: Courier, monospace; padding: 10px 15px; }
+#editor-content td { border: 1px solid black; padding: 0.4em; }
 
-#editor-copyright { position: fixed; left: 0; bottom: 0; right: 0; padding: 5px 10px; background-color: white; text-align: right; font-size: smaller; }
+#editor-copyright { flex: none; padding: 5px 10px; background-color: white; text-align: right; font-size: smaller; }

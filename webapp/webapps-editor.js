@@ -8,11 +8,6 @@ function encodeBase64(text) {
 $(function() {
 	document.execCommand('styleWithCSS', null, true); // true par défaut
 
-	// Ajuster le début de page en fonction de la hauteur de la barre d'outil
-	$(window).on('resize', function() {
-		$(document.body).css('padding-top', $('#editor-toolbar').outerHeight() + 'px');		
-	}).triggerHandler('resize');
-
 	// Permettre à l'utilisateur de pouvoir ouvrir un fichier
 	$('#open-file-button').on('click', function(event) {
 		event.preventDefault();
@@ -46,10 +41,10 @@ $(function() {
 	});
 
 	// Désactiver les entrées de menu non supportées
-	$('#editor-toolbar li a[data-command]').each(function(index, element) {
+	$('#editor-toolbar a.dropdown-item[data-command]').each(function(index, element) {
 		var self = $(element);
 		if (!document.queryCommandSupported(self.attr('data-command'))) {
-			self.parent().addClass('disabled').attr('title', 'Non supporté par votre navigateur');
+			self.addClass('disabled').attr('title', 'Non supporté par votre navigateur');
 		}
 	});
 
@@ -59,7 +54,7 @@ $(function() {
 	});
 
 	// Gérer automatiquement le clic sur les entrées de menu simples
-	$('#editor-toolbar').on('click', 'li > a.command', function(event) {
+	$('#editor-toolbar').on('click', 'a.dropdown-item.command', function(event) {
 		event.preventDefault();
 		document.execCommand($(event.target).attr('data-command'));
 	});
@@ -85,7 +80,7 @@ $(function() {
 		var self = $(event.target),
 			fontFamily = self.attr('data-font-family');
 		document.execCommand('fontName', null, fontFamily);
-	}).on('click', 'ul > li:not(:last-child) > a', function(event) {
+	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
 		// Clic sur une police dans le menu déroulant
 		var self = $(event.target).closest('a'),
 			fontFamily = self.attr('data-font-family');
@@ -94,7 +89,7 @@ $(function() {
 		fontFamilyMenu.children('button:first-child').attr('data-font-family', fontFamily).text(fontFamily);
 		// Eviter le # dans l'URL
 		event.preventDefault();
-	}).on('click', 'ul > li:last-child > a', function(event) {
+	}).on('click', '.dropdown-item:last-child', function(event) {
 		// Clic sur l'entrée "..." qui permet de choisir une police au choix
 		var fontFamily = prompt('Famille', '');
 		if (fontFamily) {
@@ -113,7 +108,7 @@ $(function() {
 		var self = $(event.target),
 			fontSize = self.attr('data-font-size');
 		document.execCommand('fontSize', null, fontSize);
-	}).on('click', 'ul > li > a', function(event) {
+	}).on('click', '.dropdown-item', function(event) {
 		// Clic sur une taille dans le menu déroulant
 		var self = $(event.target).closest('a'),
 			fontSize = self.attr('data-font-size');
@@ -131,7 +126,7 @@ $(function() {
 		var self = $(event.target),
 			color = self.css('color');
 		document.execCommand('foreColor', null, color);
-	}).on('click', 'ul > li:not(:last-child) > a', function(event) {
+	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
 		// Clic sur une couleur dans le menu déroulant
 		var self = $(event.target),
 			color = self.css('color');
@@ -142,7 +137,7 @@ $(function() {
 		event.preventDefault();
 	});
 	// Rechercher l'entrée "..." dans le sous-menu
-	colorMenu.find('ul > li:last-child > a').colorpicker({
+	colorMenu.find('.dropdown-item:last-child').colorpicker({
 		color: '#000000'
 	}).on('changeColor', function(event) {
 		// Choix d'une couleur personnalisée
@@ -153,17 +148,17 @@ $(function() {
 		// Cette couleur passe sur le bouton principal, comme dernière couleur utilisée
 		colorMenu.children('button:first-child').css('color', color);
 		// Ajouter une entrée de menu pour la retrouver facilement
-		$('<li><a href="#" style="color: ' + color + ';">Abc def</a></li>').prependTo(colorMenu.children('ul'));
+		$('<a href="#" class="dropdown-item" style="color: ' + color + ';">Abc def</a>').prependTo(colorMenu.children('.dropdown-menu'));
 	});
 
 	// Modification de la couleur de fond
 	var backgroundColorMenu = $('#background-color-menu');
 	backgroundColorMenu.on('click', 'button:first-child', function(event) {
 		// Clic sur le "button" ou son files "b" indiquant la dernière couleur utilisée
-		var self = $(event.target).children().andSelf().filter('b'),
+		var self = $(event.target).closest('button').children('b'),
 			color = self.css('background-color');
 		document.execCommand('backColor', null, color);
-	}).on('click', 'ul > li:not(:last-child) > a', function(event) {
+	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
 		// Clic sur une couleur dans le menu déroulant
 		var self = $(event.target),
 			color = self.css('background-color');
@@ -174,7 +169,7 @@ $(function() {
 		event.preventDefault();
 	});
 	// Rechercher l'entrée "..." dans le sous-menu
-	backgroundColorMenu.find('ul > li:last-child > a').colorpicker({
+	backgroundColorMenu.find('.dropdown-item:last-child').colorpicker({
 		color: '#FFFFFF'
 	}).on('changeColor', function(event) {
 		// Choix d'une couleur personnalisée
@@ -185,7 +180,7 @@ $(function() {
 		// Cette couleur passe sur le bouton principal, comme dernière couleur utilisée
 		backgroundColorMenu.children('button:first-child').children().css('background-color', color);
 		// Ajouter une entrée de menu pour la retrouver facilement
-		$('<li><a href="#" style="background-color: ' + color + ';">&nbsp;</a></li>').prependTo(backgroundColorMenu.children('ul'));
+		$('<a href="#" class="dropdown-item" style="background-color: ' + color + ';">&nbsp;</a>').prependTo(backgroundColorMenu.children('.dropdown-menu'));
 	});
 
 	/**
@@ -211,10 +206,7 @@ $(function() {
 	 * - Maj + F12 : Liste à puces
 	 * 
 	 * Autres commandes dispo
-	 * - enableInlineTableEditing <bool>
-	 * - enableObjectResizing <bool>
-	 * - formatBlock <tag>
-	 * - forwardDelete
+	 * - forwardDelete : équivalent de backspace (supprimr le caractère avant le curseur)
 	 * - heading <h1..h6>
 	 * - hiliteColor <color>
 	 * - insertBrOnReturn <bool>

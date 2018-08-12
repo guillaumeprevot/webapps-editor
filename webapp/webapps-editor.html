@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="./webapps-editor.appcache">
+<html>
 	<head>
 		<title>Editor</title>
 		<meta charset="UTF-8">
@@ -8,11 +8,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" type="text/css" href="./libs/bootstrap/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="./libs/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css" />
-		<link rel="stylesheet" type="text/css" href="./libs/font-awesome/css/font-awesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="./libs/fontawesome/css/fontawesome.min.css" />
+		<link rel="stylesheet" type="text/css" href="./libs/fontawesome/css/solid.min.css" />
 		<link rel="stylesheet" type="text/css" href="./webapps-editor.css" />
-		<link href="./webapps-editor.ico" rel="shortcut icon" />
-		<link href="./webapps-editor.ico" rel="icon" type="image/x-icon" />
-		<link href="./webapps-editor.png" rel="icon" type="image/png" sizes="16x16" />
+		<link href="./webapps-editor.ico" rel="shortcut icon" type="image/x-icon" />
 	</head>
 	<body>
 
@@ -25,18 +24,18 @@
 			<i class="fa fa-bars"></i>
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<ul class="dropdown-menu">
-			<li><a href="#" id="open-file-button"><i class="fa fa-file"></i> Ouvrir un fichier</a></li>
-			<li><a href="#" id="save-file-button" download="fichier.html"><i class="fa fa-save"></i> Sauvegarder le texte</a></li>
-			<li role="separator" class="divider"></li>
-			<li><a href="#" class="command" data-command="undo"><i class="fa fa-undo"></i> Annuler</a></li>
-			<li><a href="#" class="command" data-command="redo"><i class="fa fa-repeat"></i> Refaire</a></li>
-			<li role="separator" class="divider"></li>
-			<li><a href="#" class="command" data-command="cut"><i class="fa fa-cut"></i> Couper</a></li>
-			<li><a href="#" class="command" data-command="copy"><i class="fa fa-copy"></i> Copier</a></li>
-			<li><a href="#" class="command" data-command="paste"><i class="fa fa-paste"></i> Coller</a></li>
-			<li><a href="#" class="command" data-command="delete"><i class="fa fa-remove"></i> Supprimer la sélection</a></li>
-		</ul>
+		<div class="dropdown-menu">
+			<a href="#" class="dropdown-item" id="open-file-button"><i class="fa fa-file"></i> Ouvrir un fichier</a>
+			<a href="#" class="dropdown-item" id="save-file-button" download="fichier.html"><i class="fa fa-save"></i> Sauvegarder le texte</a>
+			<div class="dropdown-divider"></div>
+			<a href="#" class="dropdown-item command" data-command="undo"><i class="fa fa-undo"></i> Annuler</a>
+			<a href="#" class="dropdown-item command" data-command="redo"><i class="fa fa-redo"></i> Refaire</a>
+			<div class="dropdown-divider"></div>
+			<a href="#" class="dropdown-item command" data-command="cut"><i class="fa fa-cut"></i> Couper</a>
+			<a href="#" class="dropdown-item command" data-command="copy"><i class="fa fa-copy"></i> Copier</a>
+			<a href="#" class="dropdown-item command" data-command="paste"><i class="fa fa-paste"></i> Coller</a>
+			<a href="#" class="dropdown-item command" data-command="delete"><i class="fa fa-backspace"></i> Supprimer la sélection</a>
+		</div>
 	</div>
 
 	<div class="btn-group" id="font-family-menu">
@@ -45,24 +44,24 @@
 			<span class="caret"></span>
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<ul class="dropdown-menu">
-			<li><a href="#" data-font-family="Arial">Arial <span class="info">(sans-serif)</span></a></li>
-			<li><a href="#" data-font-family="Calibri">Calibri <span class="info">(sans-serif)</span></a></li>
-			<li><a href="#" data-font-family="Century Gothic">Century Gothic <span class="info">(sans-serif)</span></a></li>
-			<li><a href="#" data-font-family="Consolas">Consolas <span class="info">(monospace)</span></a></li>
-			<li><a href="#" data-font-family="Courier">Courier <span class="info">(monospace)</span></a></li>
-			<li><a href="#" data-font-family="Courier New">Courier New <span class="info">(monospace)</span></a></li>
-			<li><a href="#" data-font-family="DejaVu Sans">DejaVu Sans <span class="info">(sans-serif)</span></a></li>
-			<li><a href="#" data-font-family="DejaVu Serif">DejaVu Serif <span class="info">(serif)</span></a></li>
-			<li><a href="#" data-font-family="Garamond">Garamond <span class="info">(serif)</span></a></li>
-			<li><a href="#" data-font-family="Helvetica">Helvetica <span class="info">(sans-serif)</span></a></li>
-			<li><a href="#" data-font-family="Mistral">Mistral <span class="info">(cursive)</span></a></li>
-			<li><a href="#" data-font-family="Tahoma">Tahoma <span class="info">(sans-serif)</span></a></li>
-			<li><a href="#" data-font-family="Times New Roman">Times New Roman <span class="info">(serif)</span></a></li>
-			<li><a href="#" data-font-family="Webdings">Webdings <span class="info">(fantasy)</span></a></li>
-			<li role="separator" class="divider"></li>
-			<li><a href="#">...</a></li>
-		</ul>
+		<div class="dropdown-menu">
+			<a href="#" class="dropdown-item" data-font-family="Arial">Arial <span class="info">(sans-serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Calibri">Calibri <span class="info">(sans-serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Century Gothic">Century Gothic <span class="info">(sans-serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Consolas">Consolas <span class="info">(monospace)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Courier">Courier <span class="info">(monospace)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Courier New">Courier New <span class="info">(monospace)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="DejaVu Sans">DejaVu Sans <span class="info">(sans-serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="DejaVu Serif">DejaVu Serif <span class="info">(serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Garamond">Garamond <span class="info">(serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Helvetica">Helvetica <span class="info">(sans-serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Mistral">Mistral <span class="info">(cursive)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Tahoma">Tahoma <span class="info">(sans-serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Times New Roman">Times New Roman <span class="info">(serif)</span></a>
+			<a href="#" class="dropdown-item" data-font-family="Webdings">Webdings <span class="info">(fantasy)</span></a>
+			<div class="dropdown-divider"></div>
+			<a href="#" class="dropdown-item">...</a>
+		</div>
 	</div>
 
 	<div class="btn-group" id="font-size-menu">
@@ -71,15 +70,15 @@
 			<span class="caret"></span>
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<ul class="dropdown-menu">
-			<li><a href="#" data-font-size="1">1 <span class="info">(minimum)</span></a></li>
-			<li><a href="#" data-font-size="2">2</a></li>
-			<li><a href="#" data-font-size="3">3 <span class="info">(par défaut)</span></a></li>
-			<li><a href="#" data-font-size="4">4</a></li>
-			<li><a href="#" data-font-size="5">5</a></li>
-			<li><a href="#" data-font-size="6">6</a></li>
-			<li><a href="#" data-font-size="7">7 <span class="info">(maximum)</span></a></li>
-		</ul>
+		<div class="dropdown-menu">
+			<a href="#" class="dropdown-item" data-font-size="1">1 <span class="info">(minimum)</span></a>
+			<a href="#" class="dropdown-item" data-font-size="2">2</a>
+			<a href="#" class="dropdown-item" data-font-size="3">3 <span class="info">(par défaut)</span></a>
+			<a href="#" class="dropdown-item" data-font-size="4">4</a>
+			<a href="#" class="dropdown-item" data-font-size="5">5</a>
+			<a href="#" class="dropdown-item" data-font-size="6">6</a>
+			<a href="#" class="dropdown-item" data-font-size="7">7 <span class="info">(maximum)</span></a>
+		</div>
 	</div>
 
 	<div class="btn-group" title="Couleur du texte" id="color-menu">
@@ -88,33 +87,33 @@
 			<span class="caret"></span>
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<ul class="dropdown-menu">
-			<li><a href="#" style="color: #FF0000;">Abc def</a></li>
-			<li><a href="#" style="color: #00FF00;">Abc def</a></li>
-			<li><a href="#" style="color: #0000FF;">Abc def</a></li>
-			<li><a href="#" style="color: #000000;">Abc def</a></li>
-			<li role="separator" class="divider"></li>
-			<li><a href="#">...</a></li>
-		</ul>
+		<div class="dropdown-menu">
+			<a href="#" class="dropdown-item" style="color: #FF0000;">Abc def</a>
+			<a href="#" class="dropdown-item" style="color: #00FF00;">Abc def</a>
+			<a href="#" class="dropdown-item" style="color: #0000FF;">Abc def</a>
+			<a href="#" class="dropdown-item" style="color: #000000;">Abc def</a>
+			<div class="dropdown-divider"></div>
+			<a href="#" class="dropdown-item">...</a>
+		</div>
 	</div>
-	
+
 	<div class="btn-group" title="Couleur du fond" id="background-color-menu">
-		<button type="button" class="btn btn-default" data-command="backColor"><b style="border: 1px solid black; background-color: #FFFF00; padding: 0 2px; ">A</b></button>
+		<button type="button" class="btn btn-default" data-command="backColor"><b style="border: 1px solid black; background-color: #FFFF00; color: black; padding: 0 2px; ">A</b></button>
 		<button type="button" class="btn btn-default dropdown-toggle" data-command="backColor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<span class="caret"></span>
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>
-		<ul class="dropdown-menu">
-			<li><a href="#" style="background-color: #FF0000;">&nbsp;</a></li>
-			<li><a href="#" style="background-color: #FFFF00;">&nbsp;</a></li>
-			<li><a href="#" style="background-color: #00FF00;">&nbsp;</a></li>
-			<li><a href="#" style="background-color: #00FFFF;">&nbsp;</a></li>
-			<li><a href="#" style="background-color: #0000FF;">&nbsp;</a></li>
-			<li><a href="#" style="background-color: #FF00FF;">&nbsp;</a></li>
-			<li role="separator" class="divider"></li>
-			<li><a href="#" style="background-color: transparent;">transparent</a></li>
-			<li><a href="#">...</a></li>
-		</ul>
+		<div class="dropdown-menu">
+			<a href="#" class="dropdown-item" style="background-color: #FF0000;">&nbsp;</a>
+			<a href="#" class="dropdown-item" style="background-color: #FFFF00;">&nbsp;</a>
+			<a href="#" class="dropdown-item" style="background-color: #00FF00;">&nbsp;</a>
+			<a href="#" class="dropdown-item" style="background-color: #00FFFF;">&nbsp;</a>
+			<a href="#" class="dropdown-item" style="background-color: #0000FF;">&nbsp;</a>
+			<a href="#" class="dropdown-item" style="background-color: #FF00FF;">&nbsp;</a>
+			<div class="dropdown-divider"></div>
+			<a href="#" class="dropdown-item" style="background-color: transparent;">transparent</a>
+			<a href="#" class="dropdown-item">...</a>
+		</div>
 	</div>
 
 	<div class="btn-group">
@@ -201,7 +200,7 @@
 		</button>
 		<button type="button" class="btn btn-default prompt-command" data-command="insertHTML" title="Insérer une vidéo"
 			data-prompt="URL de la vidéo" data-default="http://www.w3schools.com/tags/movie.mp4" data-format="<video width=&quot;320&quot; height=&quot;240&quot; controls src=&quot;%VALUE%&quot;></video>">
-			<i class="fa fa-video-camera"></i>
+			<i class="fa fa-video"></i>
 		</button>
 		<button type="button" class="btn btn-default prompt-command" data-command="insertHTML" title="Insérer un média audio"
 			data-prompt="URL de la piste audio" data-default="http://www.w3schools.com/tags/horse.ogg" data-format="<audio controls src=&quot;%VALUE%&quot;></audio>">
@@ -234,12 +233,14 @@
 	grâce à <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand">Mozilla</a>,
 	<a target="_blank" href="http://jquery.com/">jQuery</a>,
 	<a target="_blank" href="http://getbootstrap.com/css/">Bootstrap</a>,
+	<a target="_blank" href="https://popper.js.org/">Popper.js</a>,
 	<a target="_blank" href="https://github.com/mjolnic/bootstrap-colorpicker/">Bootstrap Colorpicker</a> et
 	<a target="_blank" href="http://fortawesome.github.io/Font-Awesome/icons/">Font Awesome</a>,
 	favicon par <a target="_blank" href="http://dryicons.com">DryIcons</a>.
 </div>
 
 		<script type="text/javascript" src="./libs/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="./libs/popper/popper.min.js"></script>
 		<script type="text/javascript" src="./libs/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="./libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 		<script type="text/javascript" src="./webapps-editor.js"></script>
