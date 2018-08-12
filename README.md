@@ -2,27 +2,28 @@
 
 A simple HTML editor using [document.execCommand](https://developer.mozilla.org/en-US/docs/Web/API/Document/execCommand) capabilities
 
-
 ## Présentation
 
-[Cette application](http://techgp.fr/webapps/webapps-editor.html) écrite en HTML5, JavaScript et CSS3 est un éditeur de texte [WISIWYG](https://fr.wikipedia.org/wiki/What_you_see_is_what_you_get) pour l'HTML.
+[Cette application](https://techgp.fr/webapps/webapps-editor.html) écrite en HTML5, JavaScript et CSS3 est un éditeur de texte [WISIWYG](https://fr.wikipedia.org/wiki/What_you_see_is_what_you_get) pour l'HTML.
 
 Les librairies suivantes ont été utilisées pour cette application :
 
-- [jQuery 3.2.1](http://jquery.com/) sous licence MIT
-- [Bootstrap 3.3.7](http://getbootstrap.com/css/) sous licence MIT
-- [Bootstrap Colorpicker 2.5.0](https://github.com/mjolnic/bootstrap-colorpicker/) sous licence Apache 2.0
-- [Font Awesome 4.7.0](http://fortawesome.github.io/Font-Awesome/) SIL OFL 1.1 (police) et MIT (code)
+- [jQuery 3.3.1](https://jquery.com/) sous licence MIT
+- [Bootstrap 4.1.3](https://getbootstrap.com/) sous licence MIT
+- [Bootstrap Colorpicker 2.5.3](https://github.com/farbelous/bootstrap-colorpicker) sous licence Apache 2.0
+- [Popper.js 1.14.4](https://popper.js.org/) sous licence MIT
+- [Font Awesome 5.2.0](https://fontawesome.com/) SIL OFL 1.1 (police) et MIT (code)
+- [DryIcons](https://dryicons.com/) pour le favicon
 
-L'application est fournie avec un fichier manifest `webapps-editor.appcache` permettant la mise en cache et l'utilisation en mode déconnecté. Plus d'info chez Mozilla [en français](https://developer.mozilla.org/fr/docs/Utiliser_Application_Cache) ou [en anglais](https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache).
+L'application devrait fonctionner correctement en mode déconnecté grâce aux **Service Workers** intégrés aux navigateurs modernes : d'abord Chrome+Opera+Firefox puis récemment Safari+Edge ([détail ici](https://caniuse.com/#search=service+worker) ).
 
-NB : quand le certificat HTTPS est incorrect, la mise en cache échouera sous Chrome avec l'erreur `Manifest fetch Failed (9)`. Dans ce cas, faites les tests en HTTP et/ou utilisez un certificat valide en production.
+Plus d'infos sur les Services Workers chez [Google](https://developers.google.com/web/fundamentals/primers/service-workers/) ou [Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers).
 
 ## Captures d'écran
 
 ### Présentation de l'IHM
 
-![Présentation de l'IHM](./screenshots/webapps-editor-1.png)
+![Présentation de l'IHM](./screenshots/webapps-editor-2.png)
 
 ## Licence
 
@@ -64,4 +65,14 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - mise à jour de Font Awesome (4.5.0 vers 4.6.3)
 
 2017-05-21
-- mise à jour de jQuery (2.2.4 en 3.2.1), Bootstrap (3.3.6 en 3.3.7), Bootstrao ColorPicker (2.3.0 en 2.5.0) et Font Awesome (4.6.3 en 4.7.0)
+- mise à jour de jQuery (2.2.4 en 3.2.1), Bootstrap (3.3.6 en 3.3.7), Bootstrap ColorPicker (2.3.0 en 2.5.0) et Font Awesome (4.6.3 en 4.7.0)
+
+2018-08-12
+- ajout d'un bouton pour l'insertion d'un tableau (3x3 par défaut) avec les contrôles du navigateur pour ajouter/supprimer des lignes/colonnes
+- utilisation des Service Workers pour la mise en cache au lieu de [Application Cache](https://developer.mozilla.org/fr/docs/Utiliser_Application_Cache)
+- utilisation de flexbox pour gérer la position de la barre en haut, du pied-de-page et de la partie centrale
+- mise à jour de jQuery (3.2.1 en 3.3.1) + correction d'un bug suite à la suppression de "andSelf"
+- mise à jour de Bootstrap (3.3.7 en 4.1.3) + correction du DOM, principalement pour les ".dropdown-menu"
+- mise à jour de Bootstrap ColorPicker (2.5.0 en 2.5.3) mais la version 3.x a été écartée pour le moment
+- mise à jour de Font Awesome (4.7.0 en 5.2.0) + correction des icônes video-camera => video, repeat => redo et remove => backspace
+- intégration de Popper.js (1.14.4), dépendance de Bootstrap 4.x
