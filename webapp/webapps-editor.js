@@ -121,66 +121,62 @@ $(function() {
 
 	// Modification de la couleur du texte
 	var colorMenu = $('#color-menu');
-	colorMenu.on('click', 'button:first-child', function(event) {
+	var colorMenuButton = colorMenu.children().first().on('click', function(event) {
 		// Clic sur le bouton indiquant la dernière couleur utilisée
 		var self = $(event.target),
 			color = self.css('color');
 		document.execCommand('foreColor', null, color);
-	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
-		// Clic sur une couleur dans le menu déroulant
-		var self = $(event.target),
-			color = self.css('color');
-		document.execCommand('foreColor', null, color);
-		// Cette couleur passe sur le bouton principal, comme dernière couleur utilisée
-		colorMenu.children('button:first-child').css('color', color);
-		// Eviter le # dans l'URL
-		event.preventDefault();
 	});
-	// Rechercher l'entrée "..." dans le sous-menu
-	colorMenu.find('.dropdown-item:last-child').colorpicker({
-		color: '#000000'
+	var colorMenuPicker = colorMenu.children().last().colorpicker({
+		// Couleur du texte par défaut
+		color: '#000000',
+		// Palette de couleurs prédéfinies
+		colorSelectors: {
+			'black': '#000000',
+			'white': '#ffffff',
+			'color1': '#337ab7',
+			'color2': '#5cb85c',
+			'color3': '#5bc0de',
+			'color4': '#f0ad4e',
+			'color5': '#d9534f'
+		}
 	}).on('changeColor', function(event) {
-		// Choix d'une couleur personnalisée
+		// Récupération de la couleur
 		var color = event.color.toHex();
+		// Modification de la couleur du texte sélectionné
 		document.execCommand('foreColor', null, color);
-	}).on('hidePicker', function(event) {
-		var color = event.color.toHex();
-		// Cette couleur passe sur le bouton principal, comme dernière couleur utilisée
-		colorMenu.children('button:first-child').css('color', color);
-		// Ajouter une entrée de menu pour la retrouver facilement
-		$('<a href="#" class="dropdown-item" style="color: ' + color + ';">Abc def</a>').prependTo(colorMenu.children('.dropdown-menu'));
+		// Changement du bouton principal pour proposer la dernière couleur utilisée
+		colorMenuButton.css('color', color);
 	});
 
 	// Modification de la couleur de fond
 	var backgroundColorMenu = $('#background-color-menu');
-	backgroundColorMenu.on('click', 'button:first-child', function(event) {
-		// Clic sur le "button" ou son files "b" indiquant la dernière couleur utilisée
+	var backgroundColorMenuButton = backgroundColorMenu.children().first().on('click', function(event) {
+		// Clic sur le "button" ou son fils "b" indiquant la dernière couleur utilisée
 		var self = $(event.target).closest('button').children('b'),
 			color = self.css('background-color');
 		document.execCommand('backColor', null, color);
-	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
-		// Clic sur une couleur dans le menu déroulant
-		var self = $(event.target),
-			color = self.css('background-color');
-		document.execCommand('backColor', null, color);
-		// Cette couleur passe sur le bouton principal, comme dernière couleur utilisée
-		backgroundColorMenu.children('button:first-child').children().css('background-color', color);
-		// Eviter le # dans l'URL
-		event.preventDefault();
 	});
-	// Rechercher l'entrée "..." dans le sous-menu
-	backgroundColorMenu.find('.dropdown-item:last-child').colorpicker({
-		color: '#FFFFFF'
+	var backgroundColorMenuPicker = backgroundColorMenu.children().last().colorpicker({
+		// Couleur de fond par défaut
+		color: '#FFFFFF',
+		// Palette de couleurs prédéfinies
+		colorSelectors: {
+			'transparent': 'rgba(255,255,255,0)',
+			'red': '#ff0000',
+			'yellow': '#ffff00',
+			'green': '#00ff00',
+			'cyan': '#00ffff',
+			'blue': '#0000ff',
+			'magenta': '#ff00ff'
+		}
 	}).on('changeColor', function(event) {
-		// Choix d'une couleur personnalisée
+		// Récupération de la couleur
 		var color = event.color.toHex();
+		// Modification de la couleur de fond du texte sélectionné
 		document.execCommand('backColor', null, color);
-	}).on('hidePicker', function(event) {
-		var color = event.color.toHex();
-		// Cette couleur passe sur le bouton principal, comme dernière couleur utilisée
-		backgroundColorMenu.children('button:first-child').children().css('background-color', color);
-		// Ajouter une entrée de menu pour la retrouver facilement
-		$('<a href="#" class="dropdown-item" style="background-color: ' + color + ';">&nbsp;</a>').prependTo(backgroundColorMenu.children('.dropdown-menu'));
+		// Changement du bouton principal pour proposer la dernière couleur utilisée
+		backgroundColorMenuButton.children().css('background-color', color);
 	});
 
 	// Insertion d'un tableau

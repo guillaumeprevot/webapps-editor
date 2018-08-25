@@ -76,3 +76,6 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - mise à jour de Bootstrap ColorPicker (2.5.0 en 2.5.3) mais la version 3.x a été écartée pour le moment
 - mise à jour de Font Awesome (4.7.0 en 5.2.0) + correction des icônes video-camera => video, repeat => redo et remove => backspace
 - intégration de Popper.js (1.14.4), dépendance de Bootstrap 4.x
+
+2018-08-25
+- accès plus direct aux couleurs personnalisées (texte et fond) et profitant de l'option "colorSelectors" du composant "colorpicker"
