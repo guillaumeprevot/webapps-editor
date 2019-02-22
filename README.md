@@ -82,3 +82,4 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 
 2019-02-22
 - mise à jour des dépendances (Bootstrap 4.1.3 => 4.3.1, Font Awesome 5.2.0 => 5.7.2, Popper.js 1.14.4 => 1.14.7)
+- taille de fonte en "pt" (8, 9, 10, 11, _12_, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72) plutôt que HTML (1..7)

@@ -6,7 +6,7 @@ function encodeBase64(text) {
 }
 
 $(function() {
-	document.execCommand('styleWithCSS', null, true); // true par défaut
+	document.execCommand('styleWithCSS', null, false); // true par défaut. cf font-size-menu
 
 	// Permettre à l'utilisateur de pouvoir ouvrir un fichier
 	$('#open-file-button').on('click', function(event) {
@@ -107,16 +107,18 @@ $(function() {
 		// Clic sur le bouton indiquant la dernière taille utilisée
 		var self = $(event.target),
 			fontSize = self.attr('data-font-size');
-		document.execCommand('fontSize', null, fontSize);
+		// La commande "fontSize ne prend que les valeurs 1 à 7 de HTML.
+		//   document.execCommand('fontSize', null, fontSize);
+		// La page suivante propose une idée pour manipuler des valeurs en pixels, comme on en a l'habitude
+		//   https://stackoverflow.com/questions/5868295/document-execcommand-fontsize-in-pixels
+		// Attention, ne fonctionne pas si on appelle : document.execCommand('styleWithCSS', null, true); D'où l'appel avec "false" pour être sûr
+		document.execCommand('fontSize', false, 7);
+		$('#editor-content').find('font[size=7]').removeAttr('size').css('font-size', fontSize + 'pt');
 	}).on('click', '.dropdown-item', function(event) {
 		// Clic sur une taille dans le menu déroulant
-		var self = $(event.target).closest('a'),
-			fontSize = self.attr('data-font-size');
-		document.execCommand('fontSize', null, fontSize);
-		// Cette taille passe sur le bouton principal, comme dernière taille utilisée
-		fontSizeMenu.children('button:first-child').attr('data-font-size', fontSize).text(fontSize);
-		// Eviter le # dans l'URL
-		event.preventDefault();
+		var fontSize = $(event.target).closest('button').attr('data-font-size');
+		// Envoyer la taille sélectionnée dans le bouton principal et lancer l'action
+		fontSizeMenu.children('button:first-child').attr('data-font-size', fontSize).text(fontSize).click();
 	});
 
 	// Modification de la couleur du texte
