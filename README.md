@@ -9,10 +9,10 @@ A simple HTML editor using [document.execCommand](https://developer.mozilla.org/
 Les librairies suivantes ont été utilisées pour cette application :
 
 - [jQuery 3.3.1](https://jquery.com/) sous licence MIT
-- [Bootstrap 4.1.3](https://getbootstrap.com/) sous licence MIT
+- [Bootstrap 4.3.1](https://getbootstrap.com/) sous licence MIT
 - [Bootstrap Colorpicker 2.5.3](https://github.com/farbelous/bootstrap-colorpicker) sous licence Apache 2.0
-- [Popper.js 1.14.4](https://popper.js.org/) sous licence MIT
-- [Font Awesome 5.2.0](https://fontawesome.com/) SIL OFL 1.1 (police) et MIT (code)
+- [Popper.js 1.14.7](https://popper.js.org/) sous licence MIT
+- [Font Awesome 5.7.2](https://fontawesome.com/) SIL OFL 1.1 (police) et MIT (code)
 - [DryIcons](https://dryicons.com/) pour le favicon
 
 L'application devrait fonctionner correctement en mode déconnecté grâce aux **Service Workers** intégrés aux navigateurs modernes : d'abord Chrome+Opera+Firefox puis récemment Safari+Edge ([détail ici](https://caniuse.com/#search=service+worker) ).
@@ -79,3 +79,6 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 
 2018-08-25
 - accès plus direct aux couleurs personnalisées (texte et fond) et profitant de l'option "colorSelectors" du composant "colorpicker"
+
+2019-02-22
+- mise à jour des dépendances (Bootstrap 4.1.3 => 4.3.1, Font Awesome 5.2.0 => 5.7.2, Popper.js 1.14.4 => 1.14.7)
