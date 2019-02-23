@@ -12,7 +12,7 @@ $(function() {
 	document.execCommand('enableObjectResizing', null, true);
 	// Activation des flèches (resp de la croix) pour ajouter (resp supprimer) des lignes/colonnes dans les tables
 	document.execCommand('enableInlineTableEditing', null, true);
-	
+
 	// Permettre à l'utilisateur de pouvoir ouvrir un fichier
 	$('#open-file-button').on('click', function(event) {
 		event.preventDefault();
@@ -35,6 +35,16 @@ $(function() {
 		var text = $('#editor-content').html();
 		//event.preventDefault();
 		$(this).attr('href', 'data:text/plain;base64,' + encodeBase64(text));
+	});
+
+	// Voir le source HTML édité
+	$('#show-source-button').click(function(event) {
+		var text = $('#editor-content').html();
+		var w = window.open('', 'fichier.html', '');
+		// Un vieux tag html marqué obsolète mais peu importe ;-)
+		// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/plaintext
+		w.document.write('<PLAINTEXT>' + text);
+		w.document.close();
 	});
 
 	// Désactiver les boutons non supportés
@@ -224,14 +234,15 @@ $(function() {
 	 * - Maj + F12 : Liste à puces
 	 * 
 	 * Autres commandes dispo
-	 * - forwardDelete : équivalent de backspace (supprimr le caractère avant le curseur)
+	 * - defaultParagraphSeparator : choix entre "div" (par défaut), "p", "br"
+	 * - enableAbsolutePositionEditor : déplacement des éléments en position absolue
+	 * - forwardDelete : suppression du caractère APRES le curseur
 	 * - heading <h1..h6>
-	 * - hiliteColor <color>
-	 * - insertBrOnReturn <bool>
+	 * - hiliteColor <color> : semble identique à backColor
+	 * - insertBrOnReturn <bool> : passer true pour insérer des <br /> au lieu de couper le div en 2
 	 * - insertParagraph
-	 * - insertText <text>
+	 * - insertText <text> : insère du texte brut (à la différence de insertHTML)
 	 * - selectAll
-	 * - enableAbsolutePositionEditor
 	 */
 
 });

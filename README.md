@@ -86,3 +86,4 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 
 2019-02-23
 - correction de "enableObjectResizing" et "enableInlineTableEditing" qui ont été désactivés par défaut dans Firefox 64
+- ajout de la fonction "Voir le source"
