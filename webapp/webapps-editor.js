@@ -47,6 +47,31 @@ $(function() {
 		w.document.close();
 	});
 
+	// Ouvrir le contenu dans un onglet pour permettre l'impression
+	$('#print-button').click(function(event) {
+		var text = $('#editor-content').html();
+		var filename = 'fichier.html';
+		var style = $('link[href$="bootstrap.min.css"]')[0].href;
+		var w = window.open('', filename, '');
+		// Un vieux tag html marqué obsolète mais peu importe ;-)
+		// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/plaintext
+		w.document.write('<!DOCTYPE html>'
+				+ '\n<html>'
+				+ '\n  <head>'
+				+ '\n    <title>' + filename + '</title>'
+				+ '\n    <meta charset="UTF-8">'
+				+ '\n    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">'
+				+ '\n    <link type="text/css" rel="stylesheet" href="' + style + '" />'
+				+ '\n  </head>'
+				+ '\n  <body>'
+				+ '\n    <div style="font-family: Courier, monospace; padding: 10px 15px; ">'
+				+ '\n      ' + text
+				+ '\n    </div>'
+				+ '\n  </body>'
+				+ '\n</html>');
+		w.document.close();
+	});
+
 	// Désactiver les boutons non supportés
 	$('#editor-toolbar button[data-command]').each(function(index, element) {
 		var self = $(element);
