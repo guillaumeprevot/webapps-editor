@@ -6,8 +6,13 @@ function encodeBase64(text) {
 }
 
 $(function() {
-	document.execCommand('styleWithCSS', null, false); // true par défaut. cf font-size-menu
-
+	// Forcer "styleWithCSS" à false. Sinon, "font-size-menu" ne fonctionne pas bien sous Chrome
+	document.execCommand('styleWithCSS', null, false);
+	// Actiation des ancres carrées permettant de redimensionner les tables, les images, ...
+	document.execCommand('enableObjectResizing', null, true);
+	// Activation des flèches (resp de la croix) pour ajouter (resp supprimer) des lignes/colonnes dans les tables
+	document.execCommand('enableInlineTableEditing', null, true);
+	
 	// Permettre à l'utilisateur de pouvoir ouvrir un fichier
 	$('#open-file-button').on('click', function(event) {
 		event.preventDefault();
@@ -183,9 +188,6 @@ $(function() {
 
 	// Insertion d'un tableau
 	$('#insert-table-button').on('click', function() {
-		// activé par défaut
-		// document.execCommand('enableObjectResizing', null, true); // les carrés pour changer les dimensions
-		// document.execCommand('enableInlineTableEditing', null, true); // les flèches pour ajouter et la croix pour supprimer
 		document.execCommand('insertHTML', null, '<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>');
 	});
 
@@ -229,6 +231,7 @@ $(function() {
 	 * - insertParagraph
 	 * - insertText <text>
 	 * - selectAll
+	 * - enableAbsolutePositionEditor
 	 */
 
 });
