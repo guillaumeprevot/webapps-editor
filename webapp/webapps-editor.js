@@ -15,7 +15,6 @@ $(function() {
 
 	// Permettre à l'utilisateur de pouvoir ouvrir un fichier
 	$('#open-file-button').on('click', function(event) {
-		event.preventDefault();
 		$('#open-file-input').click();
 	});
 	$('#open-file-input').on('change', function(event) {
@@ -81,21 +80,15 @@ $(function() {
 	});
 
 	// Désactiver les entrées de menu non supportées
-	$('#editor-toolbar a.dropdown-item[data-command]').each(function(index, element) {
+	$('#editor-toolbar .dropdown-item[data-command]').each(function(index, element) {
 		var self = $(element);
 		if (!document.queryCommandSupported(self.attr('data-command'))) {
 			self.addClass('disabled').attr('title', 'Non supporté par votre navigateur');
 		}
 	});
 
-	// Gérer automatiquement le clic sur les boutons simples
+	// Gérer automatiquement le clic sur les boutons simples ou les entrées de menu
 	$('#editor-toolbar').on('click', 'button.command', function(event) {
-		document.execCommand($(event.target).attr('data-command'));
-	});
-
-	// Gérer automatiquement le clic sur les entrées de menu simples
-	$('#editor-toolbar').on('click', 'a.dropdown-item.command', function(event) {
-		event.preventDefault();
 		document.execCommand($(event.target).attr('data-command'));
 	});
 
@@ -115,36 +108,30 @@ $(function() {
 
 	// Modification de la propriété "font-family"
 	var fontFamilyMenu = $('#font-family-menu');
-	fontFamilyMenu.on('click', 'button:first-child', function(event) {
-		// Clic sur le bouton indiquant la dernière police utilisée
+	fontFamilyMenu.on('click', 'button:not(.dropdown-item)', function(event) {
+		// Clic sur le bouton indiquant la police à utiliser
 		var self = $(event.target),
 			fontFamily = self.attr('data-font-family');
 		document.execCommand('fontName', null, fontFamily);
 	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
 		// Clic sur une police dans le menu déroulant
-		var self = $(event.target).closest('a'),
+		var self = $(event.target).closest('button'),
 			fontFamily = self.attr('data-font-family');
-		document.execCommand('fontName', null, fontFamily);
-		// Cette police passe sur le bouton principal, comme dernière police utilisée
-		fontFamilyMenu.children('button:first-child').attr('data-font-family', fontFamily).text(fontFamily);
-		// Eviter le # dans l'URL
-		event.preventDefault();
+		// Envoyer la police sélectionnée dans le bouton principal et lancer l'action
+		fontFamilyMenu.children('button:first-child').attr('data-font-family', fontFamily).text(fontFamily).click();
 	}).on('click', '.dropdown-item:last-child', function(event) {
 		// Clic sur l'entrée "..." qui permet de choisir une police au choix
 		var fontFamily = prompt('Famille', '');
 		if (fontFamily) {
-			document.execCommand('fontName', null, fontFamily);
-			// Cette police passe sur le bouton principal, comme dernière police utilisée
-			fontFamilyMenu.children('button:first-child').attr('data-font-family', fontFamily).text(fontFamily);
+			// Envoyer la police sélectionnée dans le bouton principal et lancer l'action
+			fontFamilyMenu.children('button:first-child').attr('data-font-family', fontFamily).text(fontFamily).click();
 		}
-		// Eviter le # dans l'URL
-		event.preventDefault();
 	});
 
 	// Modification de la propriété "font-size"
 	var fontSizeMenu = $('#font-size-menu');
-	fontSizeMenu.on('click', 'button:first-child', function(event) {
-		// Clic sur le bouton indiquant la dernière taille utilisée
+	fontSizeMenu.on('click', 'button:not(.dropdown-item)', function(event) {
+		// Clic sur le bouton indiquant la taille à utiliser
 		var self = $(event.target),
 			fontSize = self.attr('data-font-size');
 		// La commande "fontSize ne prend que les valeurs 1 à 7 de HTML.
@@ -164,9 +151,9 @@ $(function() {
 	// Modification de la couleur du texte
 	var colorMenu = $('#color-menu');
 	var colorMenuButton = colorMenu.children().first().on('click', function(event) {
-		// Clic sur le bouton indiquant la dernière couleur utilisée
-		var self = $(event.target),
-			color = self.css('color');
+		// Clic sur le bouton indiquant la couleur à utiliser
+		var button = $(event.target).closest('button'),
+			color = button.attr('data-color');
 		document.execCommand('foreColor', null, color);
 	});
 	var colorMenuPicker = colorMenu.children().last().colorpicker({
@@ -183,28 +170,28 @@ $(function() {
 			'color5': '#d9534f'
 		}
 	}).on('changeColor', function(event) {
-		// Récupération de la couleur
+		// Choix d'une couleur dans le "colorpicker"
 		var color = event.color.toHex();
-		// Modification de la couleur du texte sélectionné
-		document.execCommand('foreColor', null, color);
-		// Changement du bouton principal pour proposer la dernière couleur utilisée
+		// Montrer la dernière couleur utilisée
 		colorMenuButton.css('color', color);
+		// Envoyer la couleur sélectionnée dans le bouton principal et lancer l'action
+		colorMenuButton.attr('data-color', color).click();
 	});
 
 	// Modification de la couleur de fond
 	var backgroundColorMenu = $('#background-color-menu');
 	var backgroundColorMenuButton = backgroundColorMenu.children().first().on('click', function(event) {
 		// Clic sur le "button" ou son fils "b" indiquant la dernière couleur utilisée
-		var self = $(event.target).closest('button').children('b'),
-			color = self.css('background-color');
-		document.execCommand('backColor', null, color);
+		var button = $(event.target).closest('button'),
+			color = button.attr('data-color');
+		document.execCommand('hiliteColor', null, color);
 	});
 	var backgroundColorMenuPicker = backgroundColorMenu.children().last().colorpicker({
 		// Couleur de fond par défaut
 		color: '#FFFFFF',
 		// Palette de couleurs prédéfinies
 		colorSelectors: {
-			'transparent': 'rgba(255,255,255,0)',
+			'transparent': 'transparent',
 			'red': '#ff0000',
 			'yellow': '#ffff00',
 			'green': '#00ff00',
@@ -213,12 +200,12 @@ $(function() {
 			'magenta': '#ff00ff'
 		}
 	}).on('changeColor', function(event) {
-		// Récupération de la couleur
+		// Choix d'une couleur dans le "colorpicker"
 		var color = event.color.toHex();
-		// Modification de la couleur de fond du texte sélectionné
-		document.execCommand('backColor', null, color);
-		// Changement du bouton principal pour proposer la dernière couleur utilisée
-		backgroundColorMenuButton.children().css('background-color', color);
+		// Montrer la dernière couleur utilisée
+		backgroundColorMenuButton.children('b').css('background-color', color);
+		// Envoyer la couleur sélectionnée dans le bouton principal et lancer l'action
+		backgroundColorMenuButton.attr('data-color', color).click();
 	});
 
 	// Insertion d'un tableau

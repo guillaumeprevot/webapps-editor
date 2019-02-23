@@ -85,6 +85,9 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - taille de fonte en "pt" (8, 9, 10, 11, _12_, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72) plutôt que HTML (1..7)
 
 2019-02-23
-- correction de "enableObjectResizing" et "enableInlineTableEditing" qui ont été désactivés par défaut dans Firefox 64
 - ajout de la fonction "Voir le source"
 - ajout de la fonction "Imprimer"
+- correction de "enableObjectResizing" et "enableInlineTableEditing" qui ont été désactivés par défaut dans Firefox 64
+- correction de l'utilisation de la dernière couleur de texte utilisée
+- correction de l'utilisation de la couleur de fond transparente
+- refactoring des "a" en "button" (sauf pour le lien de téléchargement, qui utilise bien une URL)
