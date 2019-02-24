@@ -23,7 +23,7 @@ Plus d'infos sur les Services Workers chez [Google](https://developers.google.co
 
 ### Présentation de l'IHM
 
-![Présentation de l'IHM](./screenshots/webapps-editor-2.png)
+![Présentation de l'IHM](./screenshots/webapps-editor-3.png)
 
 ## Licence
 
@@ -91,3 +91,4 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - correction de l'utilisation de la dernière couleur de texte utilisée
 - correction de l'utilisation de la couleur de fond transparente
 - refactoring des "a" en "button" (sauf pour le lien de téléchargement, qui utilise bien une URL)
+- mise à jour de la capture d'écran
