@@ -4,20 +4,19 @@ A simple HTML editor using [document.execCommand](https://developer.mozilla.org/
 
 ## Présentation
 
-[Cette application](https://techgp.fr/webapps/webapps-editor.html) écrite en HTML5, JavaScript et CSS3 est un éditeur de texte [WISIWYG](https://fr.wikipedia.org/wiki/What_you_see_is_what_you_get) pour l'HTML.
+Cette application écrite en HTML5, JavaScript et CSS3 est un éditeur de texte [WISIWYG](https://fr.wikipedia.org/wiki/What_you_see_is_what_you_get) pour l'HTML.
 
 Les librairies suivantes ont été utilisées pour cette application :
 
-- [jQuery 3.3.1](https://jquery.com/) sous licence MIT
-- [Bootstrap 4.3.1](https://getbootstrap.com/) sous licence MIT
+- [jQuery 3.5.0](https://jquery.com/) sous licence MIT
+- [Bootstrap 4.4.1](https://getbootstrap.com/) sous licence MIT
 - [Bootstrap Colorpicker 2.5.3](https://github.com/farbelous/bootstrap-colorpicker) sous licence Apache 2.0
-- [Popper.js 1.14.7](https://popper.js.org/) sous licence MIT
-- [Font Awesome 5.7.2](https://fontawesome.com/) SIL OFL 1.1 (police) et MIT (code)
+- [Popper.js 1.16.1](https://popper.js.org/) sous licence MIT
+- [Font Awesome 5.13.0](https://fontawesome.com/) SIL OFL 1.1 (police) et MIT (code)
 - [DryIcons](https://dryicons.com/) pour le favicon
 
-L'application devrait fonctionner correctement en mode déconnecté grâce aux **Service Workers** intégrés aux navigateurs modernes : d'abord Chrome+Opera+Firefox puis récemment Safari+Edge ([détail ici](https://caniuse.com/#search=service+worker) ).
-
-Plus d'infos sur les Services Workers chez [Google](https://developers.google.com/web/fundamentals/primers/service-workers/) ou [Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers).
+L'application devrait fonctionner correctement est mode déconnecté grâce aux **Service Workers** sous Chrome, Firefox et [d'autres](https://caniuse.com/#search=service+worker).
+Plus d'infos chez [Google](https://developers.google.com/web/fundamentals/primers/service-workers/) ou [Mozilla](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers).
 
 ## Captures d'écran
 
@@ -92,3 +91,11 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - correction de l'utilisation de la couleur de fond transparente
 - refactoring des "a" en "button" (sauf pour le lien de téléchargement, qui utilise bien une URL)
 - mise à jour de la capture d'écran
+
+2019-04-18
+- ajout d'une entrée "..." au menu des tailles de police pour permettre de choisir une taille personnalisée
+- ajout d'un bouton pour activer ou non les poignées permettant de redimensionner les tableaux et les images
+- correction des boutons ".command", ".block-command" et ".prompt-command" dont le clic pouvait être mal détecté
+- amélioration du bouton de création de tableau pour demander le nombre de ligne et de colonne souhaité
+- mise à jour des dépendances (Bootstrap 4.4.1, jQuery 3.5.0,  Font Awesome 5.13.0, Popper 1.16.1)
+- mise à jour du README.md

@@ -8,8 +8,8 @@ function encodeBase64(text) {
 $(function() {
 	// Forcer "styleWithCSS" à false. Sinon, "font-size-menu" ne fonctionne pas bien sous Chrome
 	document.execCommand('styleWithCSS', null, false);
-	// Actiation des ancres carrées permettant de redimensionner les tables, les images, ...
-	document.execCommand('enableObjectResizing', null, true);
+	// Désactivation par défaut des ancres carrées permettant de redimensionner les tables, les images, ...
+	document.execCommand('enableObjectResizing', null, false);
 	// Activation des flèches (resp de la croix) pour ajouter (resp supprimer) des lignes/colonnes dans les tables
 	document.execCommand('enableInlineTableEditing', null, true);
 
@@ -87,23 +87,31 @@ $(function() {
 		}
 	});
 
-	// Gérer automatiquement le clic sur les boutons simples ou les entrées de menu
+	// Gérer automatiquement le clic sur les boutons simples ou les entrées de menu (gras, italique, ...)
 	$('#editor-toolbar').on('click', 'button.command', function(event) {
-		document.execCommand($(event.target).attr('data-command'));
+		document.execCommand($(event.target).closest('.command').attr('data-command'));
+		return false;
 	});
 
-	// Gérer automatiquement le clic sur les boutons "block-command"
+	// Gérer automatiquement le clic sur les boutons "block-command" (quote)
 	$('#editor-toolbar').on('click', 'button.block-command', function(event) {
-		var self = $(event.target);
+		var self = $(event.target).closest('.block-command');
 		document.execCommand(self.attr('data-command'), null, self.attr('data-tag') || 'P');
 	});
 
-	// Gérer automatiquement le clic sur les boutons "prompt-command"
+	// Gérer automatiquement le clic sur les boutons "prompt-command" (lien, image, vidéo, audio)
 	$('#editor-toolbar').on('click', 'button.prompt-command', function(event) {
-		var self = $(event.target),
+		var self = $(event.target).closest('.prompt-command'),
 			value = window.prompt(self.attr('data-prompt'), self.attr('data-default'));
 		if (value)
 			document.execCommand(self.attr('data-command'), null, (self.attr('data-format') || '%VALUE%').replace('%VALUE%', value));
+	});
+
+	// Gérer automatiquement le clic sur les boutons "option-command" activant/désactivant des options (enableObjectResizing)
+	$('#editor-toolbar').on('click', 'button.option-command', function(event) {
+		var self = $(event.target).closest('.option-command');
+		self.toggleClass('active');
+		document.execCommand(self.attr('data-command'), null, self.hasClass('active'));
 	});
 
 	// Modification de la propriété "font-family"
@@ -115,8 +123,7 @@ $(function() {
 		document.execCommand('fontName', null, fontFamily);
 	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
 		// Clic sur une police dans le menu déroulant
-		var self = $(event.target).closest('button'),
-			fontFamily = self.attr('data-font-family');
+		var fontFamily = $(event.target).closest('button').attr('data-font-family');
 		// Envoyer la police sélectionnée dans le bouton principal et lancer l'action
 		fontFamilyMenu.children('button:first-child').attr('data-font-family', fontFamily).text(fontFamily).click();
 	}).on('click', '.dropdown-item:last-child', function(event) {
@@ -141,12 +148,19 @@ $(function() {
 		// Attention, ne fonctionne pas si on appelle : document.execCommand('styleWithCSS', null, true); D'où l'appel avec "false" pour être sûr
 		document.execCommand('fontSize', false, 7);
 		$('#editor-content').find('font[size=7]').removeAttr('size').css('font-size', fontSize + 'pt');
-	}).on('click', '.dropdown-item', function(event) {
+	}).on('click', '.dropdown-item:not(:last-child)', function(event) {
 		// Clic sur une taille dans le menu déroulant
 		var fontSize = $(event.target).closest('button').attr('data-font-size');
 		// Envoyer la taille sélectionnée dans le bouton principal et lancer l'action
 		fontSizeMenu.children('button:first-child').attr('data-font-size', fontSize).text(fontSize).click();
-	});
+	}).on('click', '.dropdown-item:last-child', function(event) {
+		// Clic sur l'entrée "..." qui permet de choisir une taille personnalisée
+		var fontSize = prompt('Taille', '');
+		if (fontSize) {
+			// Envoyer la taille sélectionnée dans le bouton principal et lancer l'action
+			fontSizeMenu.children('button:first-child').attr('data-font-size', fontSize).text(fontSize).click();
+		}
+	});;
 
 	// Modification de la couleur du texte
 	var colorMenu = $('#color-menu');
@@ -210,7 +224,13 @@ $(function() {
 
 	// Insertion d'un tableau
 	$('#insert-table-button').on('click', function() {
-		document.execCommand('insertHTML', null, '<table><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></table>');
+		var size = prompt('Taille LxC', '3x3');
+		if (size) {
+			var rows = parseInt(size);
+			var cols = parseInt(size.substring(size.indexOf('x') + 1));
+			var html = '<table>' + ('<tr>' + '<td />'.repeat(cols) + '</tr>').repeat(rows) + '</table>';
+			document.execCommand('insertHTML', null, html);
+		}
 	});
 
 	// Une fois la page chargée, on met en place le service worker qui gère le cache
@@ -244,7 +264,7 @@ $(function() {
 	 * - Ctrl + F12 : Insérer un tableau
 	 * - F12 : Liste numérotée
 	 * - Maj + F12 : Liste à puces
-	 * 
+	 *
 	 * Autres commandes dispo
 	 * - defaultParagraphSeparator : choix entre "div" (par défaut), "p", "br"
 	 * - enableAbsolutePositionEditor : déplacement des éléments en position absolue

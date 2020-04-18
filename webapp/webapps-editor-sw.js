@@ -3,7 +3,7 @@
  * - GOOGLE : https://developers.google.com/web/fundamentals/primers/service-workers/#update-a-service-worker
  * - MOZILLA : https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers
  */
-var cacheName = 'v2';
+var cacheName = 'v3';
 var baseCacheContent = [
 	'./libs/bootstrap/css/bootstrap.min.css',
 	'./libs/bootstrap/js/bootstrap.min.js',
@@ -11,9 +11,7 @@ var baseCacheContent = [
 	'./libs/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js',
 	'./libs/fontawesome/css/fontawesome.min.css',
 	'./libs/fontawesome/css/solid.min.css',
-	'./libs/fontawesome/webfonts/fa-solid-900.ttf',
-	'./libs/fontawesome/webfonts/fa-solid-900.woff',
-	'./libs/fontawesome/webfonts/fa-solid-900.woff2',
+	'./libs/fontawesome/webfonts/fa-solid-900.woff2', // pre-cache woff2 only
 	'./libs/jquery/jquery.min.js',
 	'./libs/popper/popper.min.js',
 	'webapps-editor.css',
