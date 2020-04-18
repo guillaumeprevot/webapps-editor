@@ -10,7 +10,7 @@ Les librairies suivantes ont été utilisées pour cette application :
 
 - [jQuery 3.5.0](https://jquery.com/) sous licence MIT
 - [Bootstrap 4.4.1](https://getbootstrap.com/) sous licence MIT
-- [Bootstrap Colorpicker 2.5.3](https://github.com/farbelous/bootstrap-colorpicker) sous licence Apache 2.0
+- [Bootstrap Colorpicker 3.2.0](https://github.com/itsjavi/bootstrap-colorpicker/releases) sous licence MIT
 - [Popper.js 1.16.1](https://popper.js.org/) sous licence MIT
 - [Font Awesome 5.13.0](https://fontawesome.com/) SIL OFL 1.1 (police) et MIT (code)
 - [DryIcons](https://dryicons.com/) pour le favicon
@@ -98,4 +98,5 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - correction des boutons ".command", ".block-command" et ".prompt-command" dont le clic pouvait être mal détecté
 - amélioration du bouton de création de tableau pour demander le nombre de ligne et de colonne souhaité
 - mise à jour des dépendances (Bootstrap 4.4.1, jQuery 3.5.0,  Font Awesome 5.13.0, Popper 1.16.1)
+- mise à jour sur la dernière version de Bootstrap Color Picker (3.2.0)
 - mise à jour du README.md

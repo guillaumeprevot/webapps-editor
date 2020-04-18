@@ -170,26 +170,41 @@ $(function() {
 			color = button.attr('data-color');
 		document.execCommand('foreColor', null, color);
 	});
-	var colorMenuPicker = colorMenu.children().last().colorpicker({
-		// Couleur du texte par défaut
-		color: '#000000',
-		// Palette de couleurs prédéfinies
-		colorSelectors: {
-			'black': '#000000',
-			'white': '#ffffff',
-			'color1': '#337ab7',
-			'color2': '#5cb85c',
-			'color3': '#5bc0de',
-			'color4': '#f0ad4e',
-			'color5': '#d9534f'
+	var colorMenuPicker = colorMenu.children().last().popover({
+		placement: 'bottom',
+		html: true,
+		content: function() {
+			backgroundColorMenuPicker.popover('hide');
+			return $('<div />').colorpicker({
+				// On a géré nous-même le popover pour éviter l'input
+				popover: false,
+				inline: true,
+				// Couleur du texte par défaut
+				color: colorMenuButton.attr('data-color'),
+				// Palette de couleurs prédéfinies
+				extensions: [{
+					name: 'swatches',
+					options: {
+						colors: {
+							'black': '#000000',
+							'white': '#ffffff',
+							'primary': '#337ab7',
+							'success': '#5cb85c',
+							'info': '#5bc0de',
+							'warning': '#f0ad4e',
+							'danger': '#d9534f'
+						},
+					}
+				}]
+			}).on('colorpickerChange', function(event) {
+				// Choix d'une couleur dans le "colorpicker"
+				var color = event.color.toString();
+				// Montrer la dernière couleur utilisée
+				colorMenuButton.css('color', color);
+				// Envoyer la couleur sélectionnée dans le bouton principal et lancer l'action
+				colorMenuButton.attr('data-color', color).click();
+			});
 		}
-	}).on('changeColor', function(event) {
-		// Choix d'une couleur dans le "colorpicker"
-		var color = event.color.toHex();
-		// Montrer la dernière couleur utilisée
-		colorMenuButton.css('color', color);
-		// Envoyer la couleur sélectionnée dans le bouton principal et lancer l'action
-		colorMenuButton.attr('data-color', color).click();
 	});
 
 	// Modification de la couleur de fond
@@ -200,26 +215,47 @@ $(function() {
 			color = button.attr('data-color');
 		document.execCommand('hiliteColor', null, color);
 	});
-	var backgroundColorMenuPicker = backgroundColorMenu.children().last().colorpicker({
-		// Couleur de fond par défaut
-		color: '#FFFFFF',
-		// Palette de couleurs prédéfinies
-		colorSelectors: {
-			'transparent': 'transparent',
-			'red': '#ff0000',
-			'yellow': '#ffff00',
-			'green': '#00ff00',
-			'cyan': '#00ffff',
-			'blue': '#0000ff',
-			'magenta': '#ff00ff'
+	var backgroundColorMenuPicker = backgroundColorMenu.children().last().popover({
+		placement: 'bottom',
+		html: true,
+		content: function() {
+			colorMenuPicker.popover('hide');
+			return $('<div />').colorpicker({
+				// On a géré nous-même le popover pour éviter l'input
+				popover: false,
+				inline: true,
+				// Couleur de fond par défaut
+				color: backgroundColorMenuButton.attr('data-color'),
+				// Palette de couleurs prédéfinies
+				extensions: [{
+					name: 'swatches',
+					options: {
+						colors: {
+							'transparent': 'transparent',
+							'red': '#ff0000',
+							'yellow': '#ffff00',
+							'green': '#00ff00',
+							'cyan': '#00ffff',
+							'blue': '#0000ff',
+							'magenta': '#ff00ff'
+						},
+					}
+				}]
+			}).on('colorpickerChange', function(event) {
+				// Choix d'une couleur dans le "colorpicker"
+				var color = event.color.toString();
+				// Montrer la dernière couleur utilisée
+				backgroundColorMenuButton.css('color', color);
+				// Envoyer la couleur sélectionnée dans le bouton principal et lancer l'action
+				backgroundColorMenuButton.attr('data-color', color).click();
+			});
 		}
-	}).on('changeColor', function(event) {
-		// Choix d'une couleur dans le "colorpicker"
-		var color = event.color.toHex();
-		// Montrer la dernière couleur utilisée
-		backgroundColorMenuButton.children('b').css('background-color', color);
-		// Envoyer la couleur sélectionnée dans le bouton principal et lancer l'action
-		backgroundColorMenuButton.attr('data-color', color).click();
+	});
+
+	// Masquer les popovers des couleurs quand on retourne dans l'éditeur
+	$('#editor-content').on('click', function() {
+		colorMenuPicker.popover('hide');
+		backgroundColorMenuPicker.popover('hide');
 	});
 
 	// Insertion d'un tableau

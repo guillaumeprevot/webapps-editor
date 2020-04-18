@@ -22,7 +22,7 @@
 	<div class="btn-group">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fa fa-bars"></i>
-			<span class="sr-only">Toggle Dropdown</span>
+			<span class="sr-only">Menu fichier</span>
 		</button>
 		<div class="dropdown-menu">
 			<button type="button" class="dropdown-item" id="open-file-button"><i class="fa fa-file"></i> Ouvrir un fichier</button>
@@ -43,9 +43,8 @@
 
 	<div class="btn-group" id="font-family-menu">
 		<button type="button" class="btn btn-default" data-command="fontName" data-font-family="Courier">Courier</button>
-		<button type="button" class="btn btn-default dropdown-toggle" data-command="fontName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<span class="caret"></span>
-			<span class="sr-only">Toggle Dropdown</span>
+		<button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-command="fontName" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="sr-only">Menu des polices de caractères</span>
 		</button>
 		<div class="dropdown-menu">
 			<button type="button" class="dropdown-item" data-font-family="Arial">Arial <span class="info">(sans-serif)</span></button>
@@ -69,9 +68,8 @@
 
 	<div class="btn-group" id="font-size-menu">
 		<button type="button" class="btn btn-default" data-font-size="12">12</button>
-		<button type="button" class="btn btn-default dropdown-toggle" data-command="fontSize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<span class="caret"></span>
-			<span class="sr-only">Toggle Dropdown</span>
+		<button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-command="fontSize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			<span class="sr-only">Menu des tailles de texte</span>
 		</button>
 		<div class="dropdown-menu">
 			<button type="button" class="dropdown-item" data-font-size="8">8 <span class="info">(minimum)</span></button>
@@ -96,13 +94,17 @@
 	</div>
 
 	<div class="btn-group" title="Couleur du texte" id="color-menu">
-		<button type="button" class="btn btn-default" data-command="foreColor" data-color="#ff0000" style="color: #ff0000;"><b>A</b></button>
-		<button type="button" class="btn btn-default"><i class="fa fa-caret-down"></i></button>
+		<button type="button" class="btn btn-default" data-command="foreColor" data-color="#ff0000" style="color: #ff0000;"><i class="fa fa-font"></i></button>
+		<button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split">
+			<span class="sr-only">Menu des couleurs de texte</span>
+		</button>
 	</div>
 
 	<div class="btn-group" title="Couleur du fond" id="background-color-menu">
-		<button type="button" class="btn btn-default" data-command="backColor" data-color="#ffff00"><b style="border: 1px solid black; background-color: #ffff00; color: black; padding: 0 2px; ">A</b></button>
-		<button type="button" class="btn btn-default"><i class="fa fa-caret-down"></i></button>
+		<button type="button" class="btn btn-default" data-command="backColor" data-color="#ffff00" style="color: #ffff00;"><i class="fa fa-highlighter"></i></button>
+		<button type="button" class="btn btn-default dropdown-toggle dropdown-toggle-split">
+			<span class="sr-only">Menu des couleurs de fond</span>
+		</button>
 	</div>
 
 	<div class="btn-group">
@@ -212,7 +214,6 @@
 	<ul>
 		<li>raccourcis clavier</li>
 		<li>caractères spéciaux / smileys</li>
-		<li>colorpicker version 3 (mais pb car le picker prend le focus et perd donc la sélection)</li>
 	</ul>
 	<p>Quae dum ita struuntur, indicatum est apud Tyrum indumentum regale textum occulte, incertum quo locante vel cuius usibus apparatum. ideoque rector provinciae tunc pater Apollinaris eiusdem nominis ut conscius ductus est aliique congregati sunt ex diversis civitatibus multi, qui atrocium criminum ponderibus urgebantur.</p>
 	<p>Denique Antiochensis ordinis vertices sub uno elogio iussit occidi ideo efferatus, quod ei celebrari vilitatem intempestivam urgenti, cum inpenderet inopia, gravius rationabili responderunt; et perissent ad unum ni comes orientis tunc Honoratus fixa constantia restitisset.</p>
@@ -227,7 +228,7 @@
 	<a target="_blank" href="https://jquery.com/">jQuery</a>,
 	<a target="_blank" href="https://getbootstrap.com/">Bootstrap</a>,
 	<a target="_blank" href="https://popper.js.org/">Popper.js</a>,
-	<a target="_blank" href="https://github.com/farbelous/bootstrap-colorpicker">Bootstrap Colorpicker</a> et
+	<a target="_blank" href="https://github.com/itsjavi/bootstrap-colorpicker/releases">Bootstrap Colorpicker</a> et
 	<a target="_blank" href="https://fontawesome.com/">Font Awesome</a>,
 	favicon par <a target="_blank" href="https://dryicons.com/">DryIcons</a>.
 </div>
