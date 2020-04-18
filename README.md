@@ -22,7 +22,7 @@ Plus d'infos chez [Google](https://developers.google.com/web/fundamentals/primer
 
 ### Présentation de l'IHM
 
-![Présentation de l'IHM](./screenshots/webapps-editor-3.png)
+![Présentation de l'IHM](./screenshots/webapps-editor.png)
 
 ## Licence
 
@@ -99,4 +99,4 @@ Ce projet est distribué sous licence MIT, reproduite dans le fichier LICENSE ic
 - amélioration du bouton de création de tableau pour demander le nombre de ligne et de colonne souhaité
 - mise à jour des dépendances (Bootstrap 4.4.1, jQuery 3.5.0,  Font Awesome 5.13.0, Popper 1.16.1)
 - mise à jour sur la dernière version de Bootstrap Color Picker (3.2.0)
-- mise à jour du README.md
+- mise à jour du README.md et de la capture d'écran
